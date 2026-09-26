@@ -1,0 +1,912 @@
+* {
+    box-sizing: border-box;
+}
+
+
+:root {
+
+    --bg: #f4f7fb;
+
+    --panel: #ffffff;
+
+    --text: #172033;
+
+    --muted: #6b7280;
+
+    --primary: #2563eb;
+
+    --primary-dark: #1d4ed8;
+
+    --border: #e5e7eb;
+
+    --danger: #dc2626;
+
+    --warning: #d97706;
+
+    --success: #059669;
+}
+
+
+body {
+
+    margin: 0;
+
+    background: var(--bg);
+
+    color: var(--text);
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.topbar {
+
+    background: #101828;
+
+    color: white;
+
+    padding: 20px 5%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+.topbar h1 {
+
+    margin: 0;
+
+    font-size: 26px;
+}
+
+
+.topbar p {
+
+    margin: 5px 0 0;
+
+    color: #cbd5e1;
+}
+
+
+.status-pill {
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    background: rgba(
+        16,
+        185,
+        129,
+        .15
+    );
+
+    color: #6ee7b7;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container {
+
+    width: min(
+        1200px,
+        92%
+    );
+
+    margin: 25px auto;
+}
+
+
+/* =====================================================
+   DASHBOARD CARDS
+===================================================== */
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            1fr
+        );
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+
+.stat-card {
+
+    background: var(--panel);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 16px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(
+            15,
+            23,
+            42,
+            .04
+        );
+}
+
+
+.stat-card > span {
+
+    font-size: 28px;
+}
+
+
+.stat-card strong {
+
+    display: block;
+
+    font-size: 25px;
+}
+
+
+.stat-card small {
+
+    color: var(--muted);
+}
+
+
+/* =====================================================
+   TWO COLUMN
+===================================================== */
+
+.grid-2 {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 18px;
+
+    margin-bottom: 18px;
+}
+
+
+/* =====================================================
+   PANEL
+===================================================== */
+
+.panel {
+
+    background: var(--panel);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    margin-bottom: 18px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(
+            15,
+            23,
+            42,
+            .04
+        );
+}
+
+
+.panel-title {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+
+.panel-title h2 {
+
+    margin: 0;
+
+    font-size: 20px;
+}
+
+
+.panel-title p {
+
+    margin: 5px 0 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+.badge {
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    background: #eff6ff;
+
+    color: var(--primary);
+
+    border-radius: 8px;
+
+    padding: 7px 9px;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+label {
+
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    margin-bottom: 13px;
+}
+
+
+input,
+select {
+
+    width: 100%;
+
+    margin-top: 7px;
+
+    padding: 11px 12px;
+
+    border:
+        1px solid
+        #d1d5db;
+
+    border-radius: 10px;
+
+    background: white;
+
+    font-size: 14px;
+}
+
+
+input:focus,
+select:focus {
+
+    outline:
+        2px solid
+        #bfdbfe;
+
+    border-color:
+        var(--primary);
+}
+
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 120px;
+
+    gap: 12px;
+}
+
+
+/* =====================================================
+   SYMPTOMS
+===================================================== */
+
+.symptoms {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 8px;
+
+    margin-bottom: 16px;
+}
+
+
+.check {
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 10px;
+
+    padding: 10px;
+
+    font-weight: 500;
+
+    margin: 0;
+
+    cursor: pointer;
+}
+
+
+.check input {
+
+    width: auto;
+
+    margin:
+        0 7px 0 0;
+}
+
+
+/* =====================================================
+   LOCATION
+===================================================== */
+
+.location-box {
+
+    border:
+        1px dashed
+        #cbd5e1;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 15px 0;
+}
+
+
+.location-box small {
+
+    display: block;
+
+    color: var(--muted);
+
+    margin-top: 4px;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.primary-btn,
+.secondary-btn {
+
+    border: 0;
+
+    border-radius: 10px;
+
+    padding: 12px 15px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+
+.primary-btn {
+
+    width: 100%;
+
+    color: white;
+
+    background:
+        var(--primary);
+}
+
+
+.primary-btn:hover {
+
+    background:
+        var(--primary-dark);
+}
+
+
+.secondary-btn {
+
+    background: #eef2ff;
+
+    color: #3730a3;
+
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty {
+
+    min-height: 150px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: var(--muted);
+
+    text-align: center;
+
+    padding: 20px;
+}
+
+
+.empty div {
+
+    font-size: 32px;
+}
+
+
+.hidden {
+
+    display: none !important;
+}
+
+
+/* =====================================================
+   SEVERITY
+===================================================== */
+
+.severity-card {
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    background: #f8fafc;
+
+    border:
+        1px solid
+        var(--border);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+
+.severity-card small {
+
+    color: var(--muted);
+
+    font-weight: 800;
+}
+
+
+.severity-card h2 {
+
+    margin: 5px 0 0;
+
+    font-size: 30px;
+}
+
+
+.severity-card .score {
+
+    text-align: center;
+}
+
+
+.score span {
+
+    display: block;
+
+    font-size: 28px;
+
+    font-weight: 900;
+}
+
+
+#reasons {
+
+    padding-left: 20px;
+
+    line-height: 1.8;
+
+    color: #475569;
+}
+
+
+/* CRITICAL */
+
+.severity-critical {
+
+    border-color: #fecaca;
+
+    background: #fef2f2;
+}
+
+
+.severity-critical h2 {
+
+    color: var(--danger);
+}
+
+
+/* HIGH */
+
+.severity-high {
+
+    border-color: #fed7aa;
+
+    background: #fff7ed;
+}
+
+
+.severity-high h2 {
+
+    color: var(--warning);
+}
+
+
+/* MODERATE */
+
+.severity-moderate {
+
+    border-color: #fde68a;
+
+    background: #fffbeb;
+}
+
+
+.severity-moderate h2 {
+
+    color: #b45309;
+}
+
+
+/* LOW */
+
+.severity-low {
+
+    border-color: #a7f3d0;
+
+    background: #ecfdf5;
+}
+
+
+.severity-low h2 {
+
+    color: var(--success);
+}
+
+
+/* =====================================================
+   NOTICE
+===================================================== */
+
+.recommendation {
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    background: #fff7ed;
+
+    color: #92400e;
+
+    font-size: 12px;
+}
+
+
+.recommendation p {
+
+    margin: 5px 0 0;
+}
+
+
+/* =====================================================
+   HOSPITAL
+===================================================== */
+
+.hospital-card {
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 13px;
+
+    padding: 14px;
+
+    margin-bottom: 10px;
+
+    transition: .2s;
+}
+
+
+.hospital-card.selected {
+
+    border:
+        2px solid
+        var(--primary);
+
+    background: #eff6ff;
+}
+
+
+.hospital-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+
+.hospital-header h3 {
+
+    margin: 0;
+
+    font-size: 16px;
+}
+
+
+.match {
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    color: var(--primary);
+}
+
+
+.hospital-meta {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin: 10px 0;
+}
+
+
+.meta {
+
+    background: #f1f5f9;
+
+    padding: 5px 8px;
+
+    border-radius: 7px;
+
+    font-size: 11px;
+}
+
+
+.select-hospital {
+
+    width: 100%;
+
+    border: 0;
+
+    padding: 9px;
+
+    border-radius: 8px;
+
+    background: #e0e7ff;
+
+    color: #3730a3;
+
+    cursor: pointer;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   AMBULANCE
+===================================================== */
+
+.ambulance-card {
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 13px;
+
+    padding: 16px;
+
+    margin-bottom: 14px;
+}
+
+
+.ambulance-card h3 {
+
+    margin:
+        0 0 8px;
+}
+
+
+.on-route {
+
+    color: var(--warning);
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   MAP
+===================================================== */
+
+.route-info {
+
+    color: var(--primary);
+
+    font-weight: 800;
+
+    font-size: 13px;
+}
+
+
+#map {
+
+    height: 430px;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   ALERT
+===================================================== */
+
+.alert-message {
+
+    padding: 12px;
+
+    background: #ecfdf5;
+
+    color: #065f46;
+
+    border-radius: 10px;
+
+    margin-top: 12px;
+
+    font-weight: 700;
+
+    font-size: 13px;
+}
+
+
+.alert-item {
+
+    border-left:
+        4px solid
+        var(--primary);
+
+    padding: 12px 14px;
+
+    background: #f8fafc;
+
+    margin-bottom: 8px;
+
+    border-radius: 8px;
+}
+
+
+.alert-item strong {
+
+    display: block;
+}
+
+
+.alert-item small {
+
+    color: var(--muted);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+    text-align: center;
+
+    color: var(--muted);
+
+    padding: 25px;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .stats-grid,
+    .grid-2 {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .topbar {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .symptoms {
+
+        grid-template-columns: 1fr;
+    }
+
+}
