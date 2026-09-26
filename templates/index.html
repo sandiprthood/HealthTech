@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        AI Emergency Response Platform
+    </title>
+
+    <!-- Leaflet Map CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <!-- Our CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="topbar">
+
+    <div>
+
+        <h1>
+            🚑 AI Emergency Response
+        </h1>
+
+        <p>
+            Emergency Coordination & Hospital Pre-Alert
+        </p>
+
+    </div>
+
+    <div class="status-pill">
+
+        ● SYSTEM ONLINE
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- =====================================================
+     DASHBOARD
+====================================================== -->
+
+<section class="stats-grid">
+
+
+    <div class="stat-card">
+
+        <span>
+            🚨
+        </span>
+
+        <div>
+
+            <strong id="activeEmergencies">
+                0
+            </strong>
+
+            <small>
+                Active Emergencies
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <span>
+            🚑
+        </span>
+
+        <div>
+
+            <strong id="availableAmbulances">
+                0
+            </strong>
+
+            <small>
+                Available Ambulances
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <span>
+            🏥
+        </span>
+
+        <div>
+
+            <strong id="connectedHospitals">
+                0
+            </strong>
+
+            <small>
+                Connected Hospitals
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <span>
+            🔔
+        </span>
+
+        <div>
+
+            <strong id="alertsSent">
+                0
+            </strong>
+
+            <small>
+                Pre-Alerts Sent
+            </small>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     EMERGENCY + AI SECTION
+====================================================== -->
+
+<section class="grid-2">
+
+
+<!-- EMERGENCY FORM -->
+
+<div class="panel">
+
+    <div class="panel-title">
+
+        <div>
+
+            <h2>
+                🚨 New Emergency
+            </h2>
+
+            <p>
+                Enter emergency information
+            </p>
+
+        </div>
+
+        <span class="badge">
+            AI TRIAGE
+        </span>
+
+    </div>
+
+
+    <form id="emergencyForm">
+
+
+        <div class="form-row">
+
+
+            <label>
+
+                Patient Name
+
+                <input
+                    id="patientName"
+                    type="text"
+                    placeholder="e.g. Rahul Patil"
+                    required
+                >
+
+            </label>
+
+
+            <label>
+
+                Age
+
+                <input
+                    id="age"
+                    type="number"
+                    min="0"
+                    max="120"
+                    value="30"
+                    required
+                >
+
+            </label>
+
+
+        </div>
+
+
+        <label>
+
+            Emergency Type
+
+            <select id="emergencyType">
+
+                <option value="General">
+                    General Emergency
+                </option>
+
+                <option value="Trauma">
+                    Road Accident / Trauma
+                </option>
+
+                <option value="Cardiac">
+                    Cardiac Emergency
+                </option>
+
+            </select>
+
+        </label>
+
+
+        <label>
+            Symptoms / Conditions
+        </label>
+
+
+        <div class="symptoms">
+
+
+            <label class="check">
+
+                <input
+                    type="checkbox"
+                    value="Unconscious"
+                >
+
+                Unconscious
+
+            </label>
+
+
+            <label class="check">
+
+                <input
+                    type="checkbox"
+                    value="Breathing difficulty"
+                >
+
+                Breathing difficulty
+
+            </label>
+
+
+            <label class="check">
+
+                <input
+                    type="checkbox"
+                    value="Severe bleeding"
+                >
+
+                Severe bleeding
+
+            </label>
+
+
+            <label class="check">
+
+                <input
+                    type="checkbox"
+                    value="Chest pain"
+                >
+
+                Chest pain
+
+            </label>
+
+
+            <label class="check">
+
+                <input
+                    type="checkbox"
+                    value="Seizure"
+                >
+
+                Seizure
+
+            </label>
+
+
+            <label class="check">
+
+                <input
+                    type="checkbox"
+                    value="Major injury"
+                >
+
+                Major injury
+
+            </label>
+
+
+            <label class="check">
+
+                <input
+                    type="checkbox"
+                    value="Burns"
+                >
+
+                Burns
+
+            </label>
+
+
+            <label class="check">
+
+                <input
+                    type="checkbox"
+                    value="Fracture"
+                >
+
+                Possible fracture
+
+            </label>
+
+
+            <label class="check">
+
+                <input
+                    type="checkbox"
+                    value="Minor injury"
+                >
+
+                Minor injury
+
+            </label>
+
+
+        </div>
+
+
+        <div class="location-box">
+
+            <div>
+
+                <b>
+                    📍 Emergency Location
+                </b>
+
+                <small id="locationText">
+
+                    Default demo location: Pune
+
+                </small>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="secondary-btn"
+                id="locationBtn"
+            >
+
+                Use Demo Location
+
+            </button>
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            type="submit"
+        >
+
+            🤖 Assess Emergency & Find Hospital
+
+        </button>
+
+
+    </form>
+
+</div>
+
+
+<!-- AI RESULT -->
+
+<div class="panel">
+
+
+    <div class="panel-title">
+
+        <div>
+
+            <h2>
+                🤖 AI Emergency Assessment
+            </h2>
+
+            <p>
+                Prototype triage result
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="emptyResult"
+        class="empty"
+    >
+
+        <div>
+            🩺
+        </div>
+
+        <h3>
+            Waiting for emergency data
+        </h3>
+
+        <p>
+            Submit the emergency form to generate
+            a severity assessment.
+        </p>
+
+    </div>
+
+
+    <div
+        id="resultArea"
+        class="hidden"
+    >
+
+
+        <div
+            id="severityCard"
+            class="severity-card"
+        >
+
+            <div>
+
+                <small>
+                    AI PRIORITY LEVEL
+                </small>
+
+                <h2 id="severityLevel">
+                    HIGH
+                </h2>
+
+            </div>
+
+
+            <div class="score">
+
+                <span id="severityScore">
+                    0
+                </span>
+
+                <small>
+                    score
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <h3>
+            Assessment Factors
+        </h3>
+
+
+        <ul id="reasons">
+        </ul>
+
+
+        <div class="recommendation">
+
+            <b>
+                ⚠️ Prototype Notice
+            </b>
+
+            <p>
+
+                This demo uses a rules-based triage model.
+                It is not medical advice or a clinical
+                diagnostic system.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     HOSPITAL + AMBULANCE
+====================================================== -->
+
+<section class="grid-2">
+
+
+<!-- HOSPITAL -->
+
+<div class="panel">
+
+
+    <div class="panel-title">
+
+        <div>
+
+            <h2>
+                🏥 Hospital Recommendation
+            </h2>
+
+            <p>
+                Matched using emergency type,
+                distance and capacity
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="hospitalList"
+        class="hospital-list"
+    >
+
+        <div class="empty">
+
+            No recommendation yet.
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- AMBULANCE -->
+
+<div class="panel">
+
+
+    <div class="panel-title">
+
+        <div>
+
+            <h2>
+                🚑 Ambulance Assignment
+            </h2>
+
+            <p>
+                Nearest available demo ambulance
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="ambulanceArea"
+        class="empty"
+    >
+
+        No ambulance assigned yet.
+
+    </div>
+
+
+    <button
+        id="alertBtn"
+        class="primary-btn hidden"
+    >
+
+        🔔 Send Hospital Pre-Alert
+
+    </button>
+
+
+    <div
+        id="alertMessage"
+        class="alert-message hidden"
+    >
+    </div>
+
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     MAP
+====================================================== -->
+
+<section class="panel">
+
+
+    <div class="panel-title">
+
+        <div>
+
+            <h2>
+                🗺️ Emergency Route
+            </h2>
+
+            <p>
+                Emergency location to selected hospital
+            </p>
+
+        </div>
+
+
+        <div
+            id="routeInfo"
+            class="route-info"
+        >
+
+            No route calculated
+
+        </div>
+
+    </div>
+
+
+    <div id="map">
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     ALERT LOG
+====================================================== -->
+
+<section class="panel">
+
+
+    <div class="panel-title">
+
+        <div>
+
+            <h2>
+                🔔 Hospital Pre-Alert Log
+            </h2>
+
+            <p>
+                Simulated communication history
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="alertLog"
+        class="alert-log"
+    >
+
+        <div class="empty">
+
+            No alerts yet.
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+    AI Emergency Response Platform
+    • Hackathon Prototype
+    • Demo Data Only
+
+</footer>
+
+
+<!-- Leaflet JS -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<!-- Our JavaScript -->
+
+<script
+    src="{{ url_for('static', filename='script.js') }}">
+</script>
+
+
+</body>
+
+</html>
